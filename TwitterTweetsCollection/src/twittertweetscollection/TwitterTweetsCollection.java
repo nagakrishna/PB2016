@@ -35,7 +35,7 @@ import twitter4j.*;
        }
 
  
-    	   File output = new File("E:/PB/first.txt");
+    	   File output = new File("E:/PB/second.txt");
 //           if(!output.exists())
 //           {
 //           	output.createNewFile();
@@ -66,7 +66,7 @@ import twitter4j.*;
       public void onStatus(Status status) {
         statuses.add(status);
         System.out.println(statuses.size() + ":" + status.getText());
-        if (statuses.size() > 30000) {
+        if (statuses.size() > 100) {
           synchronized (lock) {
             lock.notify();
           }
@@ -127,168 +127,4 @@ import twitter4j.*;
     
 
 
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package twittertweetscollection;
-//
-//import java.io.BufferedWriter;
-//import java.io.File;
-//import java.io.FileWriter;
-//import java.io.IOException;
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.concurrent.BlockingQueue;
-//import java.util.concurrent.LinkedBlockingQueue;
-//import java.util.concurrent.TimeUnit;
-//import twitter4j.conf.ConfigurationBuilder;
-//import twitter4j.*;
-//
-///**
-// *
-// * @author Naga Krishna
-// */
-//public class TwitterTweetsCollection {
-//
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String[] args) throws InterruptedException, IOException {
-//        // TODO code application logic here
-//         final Object lock = new Object();
-//        ConfigurationBuilder cb = new ConfigurationBuilder();
-//        cb.setDebugEnabled(true)
-//                .setOAuthConsumerKey("I7WYWBE6eSNKdV4FYSyiuP0uk")
-//                .setOAuthConsumerSecret("oft7Y6WcUCvxovPU5modCZ3BOlHH2z9Px73UkFMILN4ltBhOni")
-//                .setOAuthAccessToken("3524247253-o7zXFn3r8PwPb4IUTYqHRQzVabTzfoFn9Ck7FzW")
-//                .setOAuthAccessTokenSecret("V7zkLiJmF0vsdX8rUdkXo3q1ha452vKqVtB5OoCuQWAgR");
-//        
-//        //TwitterFactory tf = new TwitterFactory(cb.build());
-//        int TOTAL_TWEETS = 10;
-//        StringBuilder stringBuilder = new StringBuilder();
-//        TwitterStream twitterStream = new TwitterStreamFactory(cb.build()).getInstance();
-//         //final BlockingQueue<Status> statuses = new LinkedBlockingQueue<Status>(10000); 
-//         final List<Status> statuses = new ArrayList();
-//       StatusListener listener = new StatusListener() {
-////            @Override
-////            public void onStatus(Status status) {
-////                System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
-////                status.toString();
-////                //stringBuilder.append(status);
-////            }
-////
-////            @Override
-////            public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
-////                System.out.println("Got a status deletion notice id:" + statusDeletionNotice.getStatusId());
-////            }
-////
-////            @Override
-////            public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
-////                System.out.println("Got track limitation notice:" + numberOfLimitedStatuses);
-////            }
-////
-////            @Override
-////            public void onScrubGeo(long userId, long upToStatusId) {
-////                System.out.println("Got scrub_geo event userId:" + userId + " upToStatusId:" + upToStatusId);
-////            }
-////
-////            @Override
-////            public void onStallWarning(StallWarning warning) {
-////                System.out.println("Got stall warning:" + warning);
-////            }
-////
-////            @Override
-////            public void onException(Exception ex) {
-////                ex.printStackTrace();
-////            }
-////        };
-//           public void onStatus(Status status) {
-//        statuses.add(status);
-//        System.out.println(statuses.size() + ":" + status.getText());
-//        if (statuses.size() > 100) {
-//          synchronized (lock) {
-//            lock.notify();
-//          }
-//          System.out.println("unlocked");
-//        }
-//      }
-//
-//      public void onDeletionNotice(
-//          StatusDeletionNotice statusDeletionNotice) {
-//        System.out.println("Got a status deletion notice id:"
-//            + statusDeletionNotice.getStatusId());
-//      }
-//
-//      public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
-//        System.out.println("Got track limitation notice:"
-//            + numberOfLimitedStatuses);
-//      }
-//
-//      public void onScrubGeo(long userId, long upToStatusId) {
-//        System.out.println("Got scrub_geo event userId:" + userId
-//            + " upToStatusId:" + upToStatusId);
-//      }
-//
-//      public void onException(Exception ex) {
-//        ex.printStackTrace();
-//      }
-//
-//      @Override
-//      public void onStallWarning(StallWarning sw) {
-//        System.out.println(sw.getMessage());
-//
-//      }
-//    };
-//
-//        twitterStream.addListener(listener);
-//       
-//        try {
-//      synchronized (lock) {
-//        lock.wait();
-//      }
-//    } catch (InterruptedException e) {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    }
-//        
-////        final List<Status> collected = new ArrayList<Status>(TOTAL_TWEETS);
-////        while (collected.size() < TOTAL_TWEETS) {
-////            // TODO: Handle InterruptedException
-////            //final Status status = statuses.poll(10, TimeUnit.SECONDS); 
-////
-////            if (status == null) {
-////                // TODO: Consider hitting this too often could indicate no further Tweets
-////                continue;
-////           }
-////            collected.add(status);
-////        }
-////        twitterStream.sample();
-////        twitterStream.shutdown();
-////        String listString = "";
-//
-////for (Status s : collected)
-////{
-////    stringBuilder.append(s);
-////}
-////
-//// 
-////    	   File output = new File("E:\naga.txt");
-////           if(!output.exists())
-////           {
-////           	output.createNewFile();
-////           }
-////           FileWriter fw = new FileWriter(output.getAbsolutePath());
-////            BufferedWriter tweetWriter = new BufferedWriter(fw);
-////            tweetWriter.write(stringBuilder.toString());
-////            tweetWriter.close();
-//    	   
-//
-//        
-//    }
-//        
-//        
-//        
-//    }
-//    
+
